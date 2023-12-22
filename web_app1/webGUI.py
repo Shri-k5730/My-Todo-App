@@ -3,9 +3,6 @@ import functions
 import os
 
 
-if (os.path.exists("D:/pythonProject/web_app1/todos.txt") == False):
-        f = open("D:/pythonProject/web_app1/todos.txt", 'w+')
-
 todos = functions.get_todos()
 
 
