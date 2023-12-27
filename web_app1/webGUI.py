@@ -1,7 +1,16 @@
 import streamlit as st
 import functions
+from datetime import datetime
+
+now = datetime.now()
+current_time = now.strftime("%d-%m-%Y %H:%M:%S")
 
 todos = functions.get_todos()
+
+
+with open('web_app1/userlog.txt', 'r') as file_local:
+    user_local = file_local.readlines()
+    user_local.append(st.experimental_user.email+" "+current_time+'\n')
 
 
 def add_todo():
@@ -27,3 +36,14 @@ for index, todo in enumerate(todos):
         functions.write_todos(todos)
         del st.session_state[todo]
         st.experimental_rerun()
+
+
+# Check historical user log
+
+
+for index, user in enumerate(user_local):
+    with open('web_app1/userlog.txt', 'w') as file:
+        file.writelines(user_local[-200:])
+
+st.write(user_local[-5:])
+
