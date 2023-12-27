@@ -30,14 +30,14 @@ if len(name) != 0:
 
     st.title("To-Do list")
     st.subheader("About app:")
-    st.write("<font color = 'Green'>This is a basic todo app that let's users create tasks "
+    st.write("<font color = 'pink'>This is a basic todo app that let's users create tasks "
              "by entering in the text box"
              " and then mark it as complete by selecting the checkbox", unsafe_allow_html=True)
     st.text_input(label="Enter the to-do in the box below:", placeholder="Add a todo here!",
                   on_change=add_todo, key="new_todo")
 
-    st.write("<i><font color = 'Red'>1. Pressing enter with no text in the box enters a blank todo!</i>"
-             "<br><i><font color = 'Red'>2. Selecting the checkbox completes "
+    st.write("<i><font color = 'tomato'>1. Pressing enter with no text in the box enters a blank todo!</i>"
+             "<br><i><font color = 'tomato'>2. Selecting the checkbox completes "
              "the to-do and removes it from the list!</i>",
              unsafe_allow_html=True)
 
