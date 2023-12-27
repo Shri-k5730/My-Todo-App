@@ -9,6 +9,8 @@ current_time = now.strftime("%d-%m-%Y %H:%M:%S")
 todos = functions.get_todos()
 user_local = functions.get_user()
 
+st.set_page_config(layout="wide")
+
 
 def add_user():
     user = st.session_state["new_user"] + " " + current_time + "\n"
