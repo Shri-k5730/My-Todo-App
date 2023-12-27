@@ -1,50 +1,52 @@
 import streamlit as st
 import functions
 from datetime import datetime
+import pandas as pd
 
 now = datetime.now()
 current_time = now.strftime("%d-%m-%Y %H:%M:%S")
 
 todos = functions.get_todos()
-
-st.write(st.session_state)
-
-with open('web_app1/userlog.txt', 'r') as file_local:
-    user_local = file_local.readlines()
-    user_local.append(st.experimental_user.email)
+user_local = functions.get_user()
 
 
-def add_todo():
-    todo = st.session_state["new_todo"] + "\n"
-    todos.append(todo)
-    functions.write_todos(todos)
+def add_user():
+    user = st.session_state["new_user"] + " " + current_time + "\n"
+    user_local.append(user)
+    functions.write_user(user_local)
 
 
-st.title("My Todo list")
-st.subheader("This is my todo list app")
-st.text_input(label="Enter the to-do in the box below:", placeholder="Add a todo here!",
-              on_change=add_todo, key="new_todo")
+name = st.text_input(label="Enter your name/alias and press enter to continue:", on_change=add_user, key="new_user")
 
-st.write("<i><font color = 'Red'>Pressing enter with no text in the box enters a blank todo!</i>"
-         "<br><i><font color = 'Red'>Selecting the checkbox completes the to-do and removes it from the list!</i>",
-         unsafe_allow_html=True)
+if len(name) != 0:
 
-
-for index, todo in enumerate(todos):
-    checkbox = st.checkbox(todo, key=todo)
-    if checkbox:
-        todos.pop(index)
+    def add_todo():
+        todo = st.session_state["new_todo"] + "\n"
+        todos.append(todo)
         functions.write_todos(todos)
-        del st.session_state[todo]
-        st.rerun()
 
 
-# Check historical user log
+    st.title("My Todo list")
+    st.subheader("This is my todo list app")
+    st.text_input(label="Enter the to-do in the box below:", placeholder="Add a todo here!",
+                  on_change=add_todo, key="new_todo")
+
+    st.write("<i><font color = 'Red'>1. Pressing enter with no text in the box enters a blank todo!</i>"
+             "<br><i><font color = 'Red'>2. Selecting the checkbox completes the to-do and removes it from the list!</i>",
+             unsafe_allow_html=True)
+
+    for index, todo in enumerate(todos):
+        checkbox = st.checkbox(todo, key=todo)
+        if checkbox:
+            todos.pop(index)
+            functions.write_todos(todos)
+            del st.session_state[todo]
+            st.rerun()
 
 
-# for index, user in enumerate(user_local):
-#     with open('web_app1/userlog.txt', 'w') as file:
-#         file.writelines(user_local[-200:])
-#
-# st.write(user_local[-5:])
+st.write("<br><b><i>Last 5 users:</i></b><br>", unsafe_allow_html=True)
+user_temp = pd.DataFrame(user_local)
+user_temp.columns = ['Names']
+st.dataframe(user_temp.tail(5), hide_index=True)
+
 
