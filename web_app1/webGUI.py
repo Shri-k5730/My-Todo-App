@@ -7,7 +7,7 @@ current_time = now.strftime("%d-%m-%Y %H:%M:%S")
 
 todos = functions.get_todos()
 
-st.write(st.experimental_user.name)
+st.write(st.experimental_user)
 
 with open('web_app1/userlog.txt', 'r') as file_local:
     user_local = file_local.readlines()
