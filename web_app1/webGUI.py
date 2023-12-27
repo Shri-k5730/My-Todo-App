@@ -10,7 +10,7 @@ todos = functions.get_todos()
 
 with open('web_app1/userlog.txt', 'r') as file_local:
     user_local = file_local.readlines()
-    user_local.append(st.experimental_user.email+" "+current_time+'\n')
+    user_local.append(st.experimental_user.email+'\n')
 
 
 def add_todo():
