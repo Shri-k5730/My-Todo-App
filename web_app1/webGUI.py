@@ -42,9 +42,9 @@ for index, todo in enumerate(todos):
 # Check historical user log
 
 
-for index, user in enumerate(user_local):
-    with open('web_app1/userlog.txt', 'w') as file:
-        file.writelines(user_local[-200:])
-
-st.write(user_local[-5:])
+# for index, user in enumerate(user_local):
+#     with open('web_app1/userlog.txt', 'w') as file:
+#         file.writelines(user_local[-200:])
+#
+# st.write(user_local[-5:])
 
